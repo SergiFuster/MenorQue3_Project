@@ -12,7 +12,7 @@ public class BulletController : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, lifeTime);
-        transform.parent = GameObject.Find("Player").transform;
+        transform.parent = GameObject.Find("BulletContainer").transform;
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * bulletVelocity, ForceMode.Impulse);
 

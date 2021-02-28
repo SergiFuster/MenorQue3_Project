@@ -4,28 +4,37 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody rb;
-    float horizontal;
-    float vertical;
+    CharacterController controller;
+    public float movementSpeed = 6f;
 
-    public int movementSpeed;
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        controller = GetComponent<CharacterController>();
     }
 
     private void Update()
     {
-        rb.AddForce(new Vector3(horizontal, 0f, vertical).normalized * movementSpeed);
+        //Movement
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+        if (direction.magnitude >= 0.1f)
+        {
+            controller.Move(direction * movementSpeed * Time.deltaTime);
+        }
+
+        //Orientation
+        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(mouseRay.origin, mouseRay.direction, out RaycastHit hit);
+        Debug.DrawRay(mouseRay.origin, mouseRay.direction * 200f, Color.red);
+
+        if(hit.collider != null)
+        {
+            if (hit.collider.gameObject.name == "FieldView")
+                transform.LookAt(hit.point);
+        }
+        
     }
 }
