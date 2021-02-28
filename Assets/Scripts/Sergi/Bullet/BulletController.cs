@@ -3,15 +3,18 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     [Range(0f, 5f)]
-    public float bulletVelocity;
     public float lifeTime;
+    Vector3 newPosition;
+    [Range(10f, 100f)]
+    public float bulletVelocity;
+    Rigidbody rb;
 
     private void Start()
     {
         Destroy(gameObject, lifeTime);
-    }
-    private void FixedUpdate()
-    {
-        transform.RotateAround(Vector3.zero, transform.right, bulletVelocity);
+        transform.parent = GameObject.Find("Player").transform;
+        rb = GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * bulletVelocity, ForceMode.Impulse);
+
     }
 }
