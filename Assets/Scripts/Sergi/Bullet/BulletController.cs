@@ -15,6 +15,7 @@ public class BulletController : MonoBehaviour
         transform.parent = GameObject.Find("BulletContainer").transform;
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * bulletVelocity, ForceMode.Impulse);
+        Destroy(gameObject, 1.5f);
 
     }
 
