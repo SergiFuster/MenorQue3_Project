@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public float health = 100f;
 
-    public void damageEnemy(int damage)
+    public void damageEnemy(float damage)
     {
         health -= damage;
 
@@ -29,4 +29,5 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log(gameObject.name + " current health: " + health);
     }
+
 }
