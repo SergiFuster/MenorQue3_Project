@@ -3,7 +3,6 @@ using UnityEngine;
 public class bulletCharacteristics : MonoBehaviour
 {
     public float bulletDamage;
-    public float bulletVelocity;
     public float lifeTime;
     public string[] tagsThatDestroy;
 
@@ -12,7 +11,6 @@ public class bulletCharacteristics : MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<Rigidbody>().AddForce(transform.forward * bulletVelocity, ForceMode.Impulse);
         transform.parent = GameObject.Find("BulletContainer").transform;
         Destroy(gameObject, lifeTime);
     }

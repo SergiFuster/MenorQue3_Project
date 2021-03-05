@@ -23,5 +23,6 @@ public class ProjectileGun : MonoBehaviour
     private void Shot()
     {
         GameObject currentBullet = Instantiate(bullet, transform.position, transform.rotation);
+        currentBullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletVelocity, ForceMode.Impulse);
     }
 }

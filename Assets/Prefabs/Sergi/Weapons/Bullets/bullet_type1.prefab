@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6194445627413030801}
   - component: {fileID: 245768694549195334}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: bullet_type1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,3 +130,4 @@ MonoBehaviour:
   lifeTime: 1.5
   tagsThatDestroy:
   - Enemy
+  - Floor
