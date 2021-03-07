@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Debug.Log(rb.velocity);
         //Movement
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -27,15 +26,14 @@ public class PlayerMovement : MonoBehaviour
 
         //Orientation
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(mouseRay.origin, mouseRay.direction, out RaycastHit hit);
-        Debug.DrawRay(mouseRay.origin, mouseRay.direction * 200f, Color.red);
+        Physics.Raycast(mouseRay, out RaycastHit hit);
 
-        if (hit.collider != null)
-        {
-            mousePosition = hit.point;
-            if (hit.collider.gameObject.name == "FieldView")
-                transform.LookAt(hit.point);
-        }
+        mousePosition = hit.point;
+
+        Vector3 orientation = mousePosition;
+        orientation.y = 2.525f;
+        
+        transform.LookAt(orientation);
         
     }
 }
