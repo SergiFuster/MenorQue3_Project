@@ -8,8 +8,9 @@ public class PickUpSystem : MonoBehaviour
     public Rigidbody rb;
     public BoxCollider coll;
     public Transform player, gunContainer;
+    public Canvas canvas;
 
-    public float pickUpRange;
+    private float pickUpRange = 3;
     public float dropForwardForce, dropUpwardForce;
 
     public bool equipped;
@@ -23,6 +24,7 @@ public class PickUpSystem : MonoBehaviour
             gunScript.enabled = false;
             rb.isKinematic = false;
             coll.isTrigger = false;
+            canvas.enabled = false;
         }
         else
         {
@@ -30,6 +32,7 @@ public class PickUpSystem : MonoBehaviour
             rb.isKinematic = true;
             coll.isTrigger = true;
             slotFull = true;
+            canvas.enabled = true;
         }
 
     }
@@ -42,10 +45,12 @@ public class PickUpSystem : MonoBehaviour
 
         //Drop if equipped and "Q" is pressed
         if (equipped && Input.GetKeyDown(KeyCode.Q)) Drop();
+
     }
 
     private void PickUp()
     {
+        canvas.enabled = true;
         equipped = true;
         slotFull = true;
 
@@ -65,6 +70,7 @@ public class PickUpSystem : MonoBehaviour
 
     private void Drop()
     {
+        canvas.enabled = false;
         equipped = false;
         slotFull = false;
 

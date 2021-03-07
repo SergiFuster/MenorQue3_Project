@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    CharacterController controller;
     public float movementSpeed = 6f;
-
+    CharacterController controller;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
     }
-
-    private void Update()
+    private void FixedUpdate()
     {
         //Movement
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -22,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            controller.Move(direction * movementSpeed * Time.deltaTime);
+            controller.SimpleMove(direction * movementSpeed);
         }
 
         //Orientation
