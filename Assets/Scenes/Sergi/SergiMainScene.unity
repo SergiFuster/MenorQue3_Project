@@ -148,15 +148,43 @@ PrefabInstance:
       objectReference: {fileID: 1927790668}
     - target: {fileID: 8259273281547466227, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: dropUpwardForce
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466227, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: dropForwardForce
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466229, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: m_Name
-      value: Weapon (2)
+      value: Barret cal.50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: fireRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: barrelSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: reloadTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: chamberSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: currentBarrel
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: currentChamber
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: bulletForwardVelocity
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281859984587, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: m_RootOrder
@@ -823,27 +851,35 @@ PrefabInstance:
       objectReference: {fileID: 1927790668}
     - target: {fileID: 8259273281547466227, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: dropUpwardForce
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466227, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: dropForwardForce
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466229, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: m_Name
-      value: Weapon
+      value: Thumper
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: fireRate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: barrelSize
-      value: 230
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: reloadTime
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: chamberSize
-      value: 40
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: currentBarrel
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: bulletVelocity
@@ -851,7 +887,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: currentChamber
-      value: 30
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: bulletUpwardVelocity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: bulletForwardVelocity
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281859984587, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: m_RootOrder
@@ -1019,19 +1063,47 @@ PrefabInstance:
       objectReference: {fileID: 1927790668}
     - target: {fileID: 8259273281547466227, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: dropUpwardForce
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466227, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: dropForwardForce
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466229, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: m_Name
-      value: Weapon (1)
+      value: M4A1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: barrelSize
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: holdToShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: reloadTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: chamberSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: currentBarrel
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: bulletVelocity
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: currentChamber
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259273281547466230, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
+      propertyPath: bulletForwardVelocity
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8259273281859984587, guid: e5871f81ebc5e724db03c0163922d688, type: 3}
       propertyPath: m_RootOrder
@@ -1304,7 +1376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3855e0d3529a5e04ca3541754782e723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 0.2
 --- !u!136 &1150200545
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1327,7 +1399,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150200543}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.26, z: 0}
+  m_LocalPosition: {x: 0, y: 7.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1085576207}
@@ -1335,24 +1407,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &1150200547
-CharacterController:
+--- !u!54 &1150200547
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150200543}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Height: 4.04
-  m_Radius: 1.01
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &1181339550
 GameObject:
   m_ObjectHideFlags: 0

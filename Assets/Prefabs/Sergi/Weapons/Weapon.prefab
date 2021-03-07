@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -208,8 +208,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -342,8 +342,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -700,11 +700,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6194445627413030807, guid: 30a60a492fc5a4d4bb6b123a7a8c0d8f, type: 3}
   firePoint: {fileID: 8259273280582332667}
-  bulletVelocity: 50
+  bulletForwardVelocity: 0
+  bulletUpwardVelocity: 0
   chamberSize: 0
   barrelSize: 0
   currentChamber: 0
   currentBarrel: 0
+  reloadTime: 0
   currentChamberAmmo: {fileID: 5738993450396031637}
   currentBarrelAmmo: {fileID: 8753502866240313620}
 --- !u!114 &8259273281547466227
@@ -725,6 +727,6 @@ MonoBehaviour:
   player: {fileID: 0}
   gunContainer: {fileID: 0}
   canvas: {fileID: 434062873718724995}
-  dropForwardForce: 10
-  dropUpwardForce: 10
+  dropForwardForce: 5
+  dropUpwardForce: 5
   equipped: 0

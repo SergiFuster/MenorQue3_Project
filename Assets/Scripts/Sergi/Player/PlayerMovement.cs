@@ -5,22 +5,24 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed = 6f;
-    CharacterController controller;
+    Rigidbody rb;
+    public static Vector3 mousePosition;
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
     {
+        Debug.Log(rb.velocity);
         //Movement
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
         if (direction.magnitude >= 0.1f)
         {
-            controller.SimpleMove(direction * movementSpeed);
+            transform.position += direction * movementSpeed;
         }
 
         //Orientation
@@ -28,8 +30,9 @@ public class PlayerMovement : MonoBehaviour
         Physics.Raycast(mouseRay.origin, mouseRay.direction, out RaycastHit hit);
         Debug.DrawRay(mouseRay.origin, mouseRay.direction * 200f, Color.red);
 
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
+            mousePosition = hit.point;
             if (hit.collider.gameObject.name == "FieldView")
                 transform.LookAt(hit.point);
         }
