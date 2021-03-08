@@ -6,7 +6,7 @@ public class PickUpSystem : MonoBehaviour
 {
     public ProjectileGun gunScript;
     public Transform player, gunContainer;
-    public Canvas canvas;
+    public GameObject canvas;
 
     private float pickUpRange = 3;
 
@@ -18,12 +18,12 @@ public class PickUpSystem : MonoBehaviour
         //Setup
         if (!equipped)
         {
-            canvas.enabled = false;
+            canvas.SetActive(false);
             gunScript.enabled = false;
         }
         else
         {
-            canvas.enabled = true;
+            canvas.SetActive(true);
             gunScript.enabled = true;
             slotFull = true;
         }
@@ -46,7 +46,7 @@ public class PickUpSystem : MonoBehaviour
 
     private void PickUp()
     {
-        canvas.enabled = true;
+        canvas.SetActive(true);
         equipped = true;
         slotFull = true;
 
@@ -64,7 +64,9 @@ public class PickUpSystem : MonoBehaviour
     {
         foreach(Transform child in GameObject.Find("WeaponContainer").GetComponent<Transform>())
         {
-            Destroy(child.gameObject);
+            if (child.tag == "Secondary Weapon")
+                Destroy(child.gameObject);
+            else child.gameObject.SetActive(false);
         }
     }
 }
