@@ -5,13 +5,10 @@ using UnityEngine;
 public class PickUpSystem : MonoBehaviour
 {
     public ProjectileGun gunScript;
-    public Rigidbody rb;
-    public BoxCollider coll;
     public Transform player, gunContainer;
     public Canvas canvas;
 
     private float pickUpRange = 3;
-    public float dropForwardForce, dropUpwardForce;
 
     public bool equipped;
     public static bool slotFull;
@@ -21,30 +18,29 @@ public class PickUpSystem : MonoBehaviour
         //Setup
         if (!equipped)
         {
-            gunScript.enabled = false;
-            rb.isKinematic = false;
-            coll.isTrigger = false;
             canvas.enabled = false;
+            gunScript.enabled = false;
         }
         else
         {
-            gunScript.enabled = true;
-            rb.isKinematic = true;
-            coll.isTrigger = true;
-            slotFull = true;
             canvas.enabled = true;
+            gunScript.enabled = true;
+            slotFull = true;
         }
 
     }
 
     private void Update()
     {
-        //Check if player is in range and "E is pressed
+        //Check if player is in range and E is pressed
         Vector3 distanceToPlayer = player.position - transform.position;
         if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
-
-        //Drop if equipped and "Q" is pressed
-        if (equipped && Input.GetKeyDown(KeyCode.Q)) Drop();
+        else if(!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && slotFull)
+        {
+            deleteCurrentWeapon();
+            PickUp();
+        }
+        
 
     }
 
@@ -60,36 +56,15 @@ public class PickUpSystem : MonoBehaviour
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         transform.localScale = Vector3.one;
 
-        //Make Rigidbody kinematic and BoxCollider a trigger 
-        rb.isKinematic = true;
-        coll.isTrigger = true;
-
         //Enable script
         gunScript.enabled = true;
     }
 
-    private void Drop()
+    private void deleteCurrentWeapon()
     {
-        canvas.enabled = false;
-        equipped = false;
-        slotFull = false;
-
-        //Set parent to null
-        transform.SetParent(null);
-
-        //Make Rigidbody not kinematic and BoxCollider normal
-        rb.isKinematic = false;
-        coll.isTrigger = false;
-
-        //AddForce
-        rb.AddForce(player.forward * dropForwardForce, ForceMode.Impulse);
-        rb.AddForce(player.up * dropForwardForce, ForceMode.Impulse);
-
-        //Add random rotation
-        float random = Random.Range(-1f, 1f);
-        rb.AddTorque(new Vector3(random, random, random) * 10);
-
-        //disable script
-        gunScript.enabled = false;
+        foreach(Transform child in GameObject.Find("WeaponContainer").GetComponent<Transform>())
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

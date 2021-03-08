@@ -18,19 +18,16 @@ public class ProjectileGun : MonoBehaviour
     public bool holdToShot;
     public float reloadTime;
     public float fireRate = 15f;
-    public TextMeshProUGUI currentChamberAmmo;
-    public TextMeshProUGUI currentBarrelAmmo;
+    public TextMeshProUGUI chamberText;
+    public TextMeshProUGUI barrelText;
 
     private bool isReloading = false;
     private float nextTimeToFire = 0f;
 
     private void Start()
     {
-        currentBarrelAmmo.text = currentBarrel.ToString();
-        currentChamberAmmo.text = currentChamber.ToString();
+        updateText();
     }
-
-
 
     private void Update()
     {
@@ -68,7 +65,7 @@ public class ProjectileGun : MonoBehaviour
         rb.AddForce((PlayerMovement.mousePosition - transform.position).normalized * bulletForwardVelocity, ForceMode.Impulse);
         rb.AddForce(transform.up * bulletUpwardVelocity, ForceMode.Impulse);
         currentChamber--;
-        currentChamberAmmo.text = currentChamber.ToString();
+        updateText();
     }
 
     IEnumerator Reload()
@@ -91,16 +88,21 @@ public class ProjectileGun : MonoBehaviour
                 currentChamber = currentBarrel;
                 currentBarrel = 0;
             }
-            currentBarrelAmmo.text = currentBarrel.ToString();
-            currentChamberAmmo.text = currentChamber.ToString();
         }
         else
         {
             Debug.Log("No ammo");
         }
 
+        updateText();
         isReloading = false;
 
 
+    }
+
+    private void updateText()
+    {
+        chamberText.text = currentChamber.ToString();
+        barrelText.text = currentBarrel.ToString();
     }
 }
