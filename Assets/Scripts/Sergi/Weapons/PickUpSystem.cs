@@ -6,7 +6,7 @@ public class PickUpSystem : MonoBehaviour
 {
     public ProjectileGun gunScript;
     public Transform player, gunContainer;
-    public GameObject canvas;
+    public Rigidbody rb;
 
     private float pickUpRange = 3;
 
@@ -18,14 +18,14 @@ public class PickUpSystem : MonoBehaviour
         //Setup
         if (!equipped)
         {
-            canvas.SetActive(false);
             gunScript.enabled = false;
+            rb.isKinematic = false;
         }
         else
         {
-            canvas.SetActive(true);
             gunScript.enabled = true;
             slotFull = true;
+            rb.isKinematic = true;
         }
 
     }
@@ -46,15 +46,16 @@ public class PickUpSystem : MonoBehaviour
 
     private void PickUp()
     {
-        canvas.SetActive(true);
         equipped = true;
         slotFull = true;
+
+        //Enable Kinematic
+        rb.isKinematic = true;
 
         // Make weapon a child of weapon container and move it to default position
         transform.SetParent(gunContainer);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector3.one;
 
         //Enable script
         gunScript.enabled = true;

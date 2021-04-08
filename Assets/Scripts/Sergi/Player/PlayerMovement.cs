@@ -7,9 +7,11 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed = 6f;
     Rigidbody rb;
     public static Vector3 mousePosition;
+    Transform tm;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        tm = GetComponent<Transform>();
     }
     private void FixedUpdate()
     {
@@ -31,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         mousePosition = hit.point;
 
         Vector3 orientation = mousePosition;
-        orientation.y = 2.525f;
+        orientation.y = tm.position.y;
         
         transform.LookAt(orientation);
         
