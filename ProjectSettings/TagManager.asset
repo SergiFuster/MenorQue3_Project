@@ -8,6 +8,13 @@ TagManager:
   - Floor
   - Secondary Weapon
   - Primary Weapon
+  - Walls
+  - Doors
+  - Stairs
+  - Crates
+  - Barrels
+  - Pods
+  - Pillars
   layers:
   - Default
   - TransparentFX

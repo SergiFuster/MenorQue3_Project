@@ -19,6 +19,7 @@ public class bulletCharacteristics : MonoBehaviour
     {
         foreach(string tag in tagsThatDestroy)
         {
+            Debug.Log(collision.gameObject.tag);
 
             if (collision.gameObject.tag == tag)
             {
