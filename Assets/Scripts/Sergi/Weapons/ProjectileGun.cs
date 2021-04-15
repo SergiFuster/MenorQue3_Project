@@ -55,6 +55,7 @@ public class ProjectileGun : MonoBehaviour
         Rigidbody rb = currentBullet.GetComponent<Rigidbody>();
         Vector3 bulletDirection = (PlayerMovement.mousePosition - transform.position).normalized * bulletForwardVelocity;
         bulletDirection.y = firePoint.position.y;
+        Debug.Log("bulletDirection is: " + bulletDirection);
         rb.AddForce(bulletDirection, ForceMode.Impulse);
         rb.AddForce(transform.up * bulletUpwardVelocity, ForceMode.Impulse);
         currentChamber--;

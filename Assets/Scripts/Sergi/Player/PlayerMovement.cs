@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public static Vector3 mousePosition;
     Transform tm;
+    public Animator anim;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -19,12 +20,15 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
+
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
         if (direction.magnitude >= 0.1f)
         {
+            anim.SetBool("isRunning", true);
             transform.position += direction * movementSpeed;
         }
+        else anim.SetBool("isRunning", false);
 
         //Orientation
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -34,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 orientation = mousePosition;
         orientation.y = tm.position.y;
+
+
         
         transform.LookAt(orientation);
         
