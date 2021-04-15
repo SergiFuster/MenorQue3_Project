@@ -7,6 +7,9 @@ public class PickUpSystem : MonoBehaviour
     public ProjectileGun gunScript;
     public Transform player, gunContainer;
     public Rigidbody rb;
+    public Transform rightHand;
+    public Transform leftHand;
+    public HandPosition Hands;
 
     private float pickUpRange = 3;
 
@@ -59,6 +62,10 @@ public class PickUpSystem : MonoBehaviour
 
         //Enable script
         gunScript.enabled = true;
+
+        //Set hands position
+        Hands.SetHandsPosition(leftHand, rightHand);
+        
     }
 
     private void deleteCurrentWeapon()
