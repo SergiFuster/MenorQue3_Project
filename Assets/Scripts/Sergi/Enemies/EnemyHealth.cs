@@ -21,8 +21,7 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         Debug.Log(gameObject.name + " has died!");
-        gameObject.GetComponent<Collider>().enabled = false;
-        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        Destroy(gameObject);
     }
 
     void hurted()

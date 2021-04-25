@@ -20,6 +20,8 @@ public class ProjectileGun : MonoBehaviour
     private bool isReloading = false;
     private float nextTimeToFire = 0f;
 
+    public ParticleSystem detonate;
+
     private void Update()
     {
         if (isReloading) return;
@@ -51,6 +53,7 @@ public class ProjectileGun : MonoBehaviour
 
     public void Shoot()
     {
+        detonate.Play();
         GameObject currentBullet = Instantiate(bullet, transform.position, transform.rotation);
         Rigidbody rb = currentBullet.GetComponent<Rigidbody>();
         Vector3 bulletDirection = (PlayerMovement.mousePosition - transform.position).normalized * bulletForwardVelocity;
