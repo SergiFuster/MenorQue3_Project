@@ -7,35 +7,47 @@ public class EnemyBehaviour : MonoBehaviour
 {
     public Transform target;
     public NavMeshAgent Agent;
-    public bool targetDetected = false;
     public float distanceToDetect;
     public float distanceToAttack;
-    private float Distance;
+    private bool targetDetected = false;
+    private float distance;
     public float attackRate;
     private float nextTimeToAttack = 0f;
+    public Animator anim;
 
     private void Update()
     {
-        Distance = (transform.position - target.position).magnitude;
+        distance = (transform.position - target.position).magnitude;
 
-        if (Distance > distanceToDetect) return; //Check if enemy have detected player
+        if (distance < distanceToDetect) targetDetected = true; //Check if enemy have detected player
 
 
         //Check if is close enough and if attack rate lets attack
-        if (Distance < distanceToAttack)
+        if (targetDetected)
         {
-            if (Time.time >= nextTimeToAttack)
+            if(distance < distanceToAttack)
             {
-                nextTimeToAttack = Time.time + 1f / attackRate;
-                Attack();
+                if (Time.time >= nextTimeToAttack)
+                {
+                    nextTimeToAttack = Time.time + 1f / attackRate;
+                    Attack();
+                }
+            }
+            else
+            {
+                Agent.SetDestination(target.position);
+                anim.SetFloat("speed", Agent.speed);
+                Agent.isStopped = false;
             }
         }
-        else Agent.SetDestination(target.position);
+        
     }
 
     public void Attack()
     {
-        Debug.Log("Attack!");
+        anim.SetFloat("speed", 0f);
+        anim.SetTrigger("attack");
+        Agent.isStopped = true;
     }
 
 }

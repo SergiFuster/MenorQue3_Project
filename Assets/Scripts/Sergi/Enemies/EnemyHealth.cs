@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public float health = 100f;
+    public Animator anim;
 
     public void damageEnemy(float damage)
     {
@@ -21,12 +22,14 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         Debug.Log(gameObject.name + " has died!");
-        Destroy(gameObject);
+        anim.SetTrigger("death");
+        Destroy(gameObject, 3f);
     }
 
     void hurted()
     {
         Debug.Log(gameObject.name + " current health: " + health);
+        anim.SetTrigger("damage");
     }
 
 }
