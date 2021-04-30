@@ -26,7 +26,16 @@ public class bulletCharacteristics : MonoBehaviour
 
                 if (collision.gameObject.tag == "Enemy")
                 {
-                    collision.gameObject.GetComponent<EnemyHealth>().damageEnemy(bulletDamage);
+                    collision.gameObject.GetComponent<EnemyController>().damageEnemy(bulletDamage);
+                    Collider[] colliders = Physics.OverlapSphere(transform.position, 50f);
+                    foreach(Collider closeObjects in colliders)
+                    {
+                        Rigidbody rigidbody = closeObjects.GetComponent<Rigidbody>();
+                        if(rigidbody != null)
+                        {
+                            rigidbody.AddExplosionForce(500f, transform.position, 0.5f);
+                        }
+                    }
                 }
 
                 //Particle System

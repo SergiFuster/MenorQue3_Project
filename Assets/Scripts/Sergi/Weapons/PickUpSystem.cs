@@ -10,8 +10,10 @@ public class PickUpSystem : MonoBehaviour
     public Transform rightHand;
     public Transform leftHand;
     public HandPosition Hands;
+    public int gunPrice;
 
     private float pickUpRange = 3;
+    public  MoneyController wallet;
 
     public bool equipped;
     public static bool slotFull;
@@ -49,22 +51,31 @@ public class PickUpSystem : MonoBehaviour
 
     private void PickUp()
     {
-        equipped = true;
-        slotFull = true;
+        if (gunPrice <= wallet.Money)
+        {
+            wallet.buyGun(gunPrice); //Discount gun price from wallet
+            equipped = true;
+            slotFull = true;
 
-        //Enable Kinematic
-        rb.isKinematic = true;
+            //Enable Kinematic
+            rb.isKinematic = true;
 
-        // Make weapon a child of weapon container and move it to default position
-        transform.SetParent(gunContainer);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(Vector3.zero);
+            // Make weapon a child of weapon container and move it to default position
+            transform.SetParent(gunContainer);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
 
-        //Enable script
-        gunScript.enabled = true;
+            //Enable script
+            gunScript.enabled = true;
 
-        //Set hands position
-        Hands.SetHandsPosition(leftHand, rightHand);
+            //Set hands position
+            Hands.SetHandsPosition(leftHand, rightHand);
+        }
+        else
+        {
+            Debug.Log("You have not enough money");
+        }
+        
         
     }
 

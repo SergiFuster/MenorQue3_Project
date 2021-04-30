@@ -56,10 +56,7 @@ public class ProjectileGun : MonoBehaviour
         detonate.Play();
         GameObject currentBullet = Instantiate(bullet, transform.position, transform.rotation);
         Rigidbody rb = currentBullet.GetComponent<Rigidbody>();
-        Vector3 bulletDirection = (PlayerMovement.mousePosition - transform.position).normalized * bulletForwardVelocity;
-        bulletDirection.y = firePoint.position.y;
-        Debug.Log("bulletDirection is: " + bulletDirection);
-        rb.AddForce(bulletDirection, ForceMode.Impulse);
+        rb.AddForce(transform.forward * bulletForwardVelocity, ForceMode.Impulse);
         rb.AddForce(transform.up * bulletUpwardVelocity, ForceMode.Impulse);
         currentChamber--;
         Debug.Log("Ammo: " + currentChamber);
