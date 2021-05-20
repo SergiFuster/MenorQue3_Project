@@ -17,23 +17,21 @@ public class PowerUpManager : MonoBehaviour
     {
         if(PowerUp.ToString() == "speed")
         {
-            float currentSpeed = movement.movementSpeed;
             movement.movementSpeed *= multiplier;
             yield return new WaitForSeconds(duration);
-            movement.movementSpeed = currentSpeed;
+            movement.movementSpeed /= multiplier;
         }
         else if(PowerUp.ToString() == "health")
         {
-            health.Health *= multiplier;
+            health.takeHealth(multiplier);
             yield return new WaitForSeconds(0f);
         }
         else if(PowerUp.ToString() == "fireRate")
         {
             Gun = gameObject.transform.Find("WeaponContainer").GetChild(0).GetComponent<ProjectileGun>();
-            float currentFireRate = Gun.fireRate;
             Gun.fireRate *= multiplier;
             yield return new WaitForSeconds(duration);
-            Gun.fireRate = currentFireRate;
+            Gun.fireRate /= multiplier;
 
         }
     }

@@ -16,11 +16,14 @@ public class ProjectileGun : MonoBehaviour
     public bool holdToShot;
     public float reloadTime;
     public float fireRate = 15f;
+    public AmmoUI ammoUI;
+    public AmmoBar ammoBar;
 
     private bool isReloading = false;
     private float nextTimeToFire = 0f;
 
     public ParticleSystem detonate;
+
 
     private void Update()
     {
@@ -53,13 +56,15 @@ public class ProjectileGun : MonoBehaviour
 
     public void Shoot()
     {
+        
         detonate.Play();
         GameObject currentBullet = Instantiate(bullet, transform.position, transform.rotation);
         Rigidbody rb = currentBullet.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * bulletForwardVelocity, ForceMode.Impulse);
         rb.AddForce(transform.up * bulletUpwardVelocity, ForceMode.Impulse);
         currentChamber--;
-        Debug.Log("Ammo: " + currentChamber);
+        updateAmmoText();
+        ammoBar.setAmmo(currentChamber);
     }
 
     IEnumerator Reload()
@@ -67,15 +72,27 @@ public class ProjectileGun : MonoBehaviour
         isReloading = true;
 
         Debug.Log("Reloading...");
+        ammoUI.reloadingAnimation(true);
+
 
         yield return new WaitForSeconds(reloadTime);
 
         currentChamber = chamberSize;
+
+        ammoBar.setAmmo(currentChamber);
+
+        ammoUI.reloadingAnimation(false);
+        updateAmmoText();
 
         Debug.Log("Reloaded!");
 
         isReloading = false;
 
 
+    }
+
+    public void updateAmmoText()
+    {
+        ammoUI.setAmmoText(currentChamber);
     }
 }

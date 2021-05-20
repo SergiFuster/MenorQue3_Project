@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MoneyController : MonoBehaviour
 {
-    public int Money = 0;
+    public static float Money = 0;
+    public MoneyUI moneyText;
 
     public void buyGun(int moneyAmount)
     {
-        Money -= moneyAmount;
+        moneyText.updateMoney(-moneyAmount); //Update the UI money text
         Debug.Log("Current money: " + Money);
     }
 
@@ -17,8 +18,8 @@ public class MoneyController : MonoBehaviour
         CurrencyController currency = other.GetComponent<CurrencyController>();
         if(currency != null)
         {
-            Money += currency.value;
             currency.pickedUp();
+            moneyText.updateMoney(currency.value); //Update the UI money text
             Debug.Log("Current money: " + Money);
         }
 

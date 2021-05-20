@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PickUpSystem : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class PickUpSystem : MonoBehaviour
     public Transform leftHand;
     public HandPosition Hands;
     public int gunPrice;
+    public Sprite wImage;
+    public WeaponUI weaponImage;
+
+    public TrackedObject indicator;
 
     private float pickUpRange = 3;
     public  MoneyController wallet;
@@ -18,8 +23,13 @@ public class PickUpSystem : MonoBehaviour
     public bool equipped;
     public static bool slotFull;
 
+    public AmmoBar ammoBar;
+
     private void Start()
     {
+        //Add this weapon to price manager Game Object array
+        PriceManager.manager.addWeapon(this.gameObject);
+
         //Setup
         if (!equipped)
         {
@@ -39,20 +49,36 @@ public class PickUpSystem : MonoBehaviour
     {
         //Check if player is in range and E is pressed
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
-        else if(!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && slotFull)
+
+        if(distanceToPlayer.magnitude <= pickUpRange)
         {
-            deleteCurrentWeapon();
-            PickUp();
+            if (!equipped && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+            else if (!equipped && Input.GetKeyDown(KeyCode.E) && slotFull)
+            {
+                PickUp();
+            }
         }
         
 
     }
 
+
     private void PickUp()
     {
-        if (gunPrice <= wallet.Money)
+        if (gunPrice <= MoneyController.Money)
         {
+            //Set ammo bar UI values
+            ammoBar.setMaxAmmo(gunScript.chamberSize);
+
+            //Remove this weapon from price manager Game Object array
+            PriceManager.manager.removeWeapon(this.gameObject);
+
+            deleteCurrentWeapon();
+
+            weaponImage.setWeaponImage(wImage); //Change Weapon image
+
+            gunScript.updateAmmoText();
+
             wallet.buyGun(gunPrice); //Discount gun price from wallet
             equipped = true;
             slotFull = true;
@@ -70,6 +96,9 @@ public class PickUpSystem : MonoBehaviour
 
             //Set hands position
             Hands.SetHandsPosition(leftHand, rightHand);
+
+            //Delete indicator
+            indicator.deleteIndicator();
         }
         else
         {

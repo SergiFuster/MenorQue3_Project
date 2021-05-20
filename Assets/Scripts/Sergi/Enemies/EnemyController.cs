@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     public NavMeshAgent Agent;
     public float distanceToDetect;
     public float distanceToAttack;
-    private bool targetDetected = false;
+    public bool targetDetected = true;
     private float distance;
     public float attackRate;
     private float nextTimeToAttack = 0f;
@@ -18,13 +18,22 @@ public class EnemyController : MonoBehaviour
     private bool dead = false;
     public Transform attackPoint;
     public float damageAttack;
-    public Transform bleedPoint;
-    public ParticleSystem bleed;
+    public HealthBar healthBar;
+
+    public GameObject goldToken;
+    public GameObject diamondToken;
+    public GameObject magmaToken;
+
+    const int goldTokenProb = 50;
+    const int diamondTokenProb = 10;
+    const int magmaTokenProb = 5;
 
     private void Start()
     {
+        target = GameObject.Find("Player").transform;
         setRigidbodiesState(true);
         setCollidersState(false);
+        healthBar.setMaxHealth(health);
     }
     private void Update()
     {
@@ -60,8 +69,7 @@ public class EnemyController : MonoBehaviour
     {
         health -= damage;
 
-
-        bleed.Play(bleedPoint);
+        healthBar.setHealth(health);
         
         if (health <= 0)
         {
@@ -72,13 +80,50 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
+        Rigidbody zombieRB = this.GetComponent<Rigidbody>();
+        //Random token spawner
+        int random;
+        random = Random.Range(0, 100);
 
+        if (random <= goldTokenProb)
+        {
+            if (random <= diamondTokenProb)
+            {
+                if (random <= magmaTokenProb)
+                {
+                    GameObject currencie = Instantiate(magmaToken, transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+                    Rigidbody rb = currencie.GetComponent<Rigidbody>();
+                    rb.AddTorque(new Vector3(Random.Range(0, 90), Random.Range(0, 90), Random.Range(0, 90)), ForceMode.Impulse);
+                }
+                else
+                {
+                    GameObject currencie = Instantiate(diamondToken, transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+                    Rigidbody rb = currencie.GetComponent<Rigidbody>();
+                    rb.AddTorque(new Vector3(Random.Range(0, 90), Random.Range(0, 90), Random.Range(0, 90)), ForceMode.Impulse);
+
+
+                }
+            }
+            else
+            {
+                GameObject currencie = Instantiate(goldToken, transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+                Rigidbody rb = currencie.GetComponent<Rigidbody>();
+                rb.AddTorque(new Vector3(Random.Range(0, 90), Random.Range(0, 90), Random.Range(0, 90)), ForceMode.Impulse);
+            }
+
+        }
+
+
+        //Destroy enemy
         Destroy(gameObject, 3f);
         GetComponent<Animator>().enabled = false;
         setRigidbodiesState(false);
         setCollidersState(true);
         Agent.isStopped = true;
         dead = true;
+        GameObject.Find("RoundManager").GetComponent<RoundController>().enemyKilled();
+
+        
 
 
     }
