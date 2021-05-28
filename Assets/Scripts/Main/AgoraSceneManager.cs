@@ -9,8 +9,8 @@ public class AgoraSceneManager : MonoBehaviour
     {
         Konrad = 3,
         Carla = 1,
-        David = 2,
-        Sergi = 0
+        Sergi = 2,
+        David = 0
     }
     public nombres chooseScene;
 

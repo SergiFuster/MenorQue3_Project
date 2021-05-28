@@ -15,36 +15,39 @@ public class bulletCharacteristics : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        foreach(string tag in tagsThatDestroy)
+
+        foreach (string tag in tagsThatDestroy)
         {
             Debug.Log(collision.gameObject.tag);
 
             if (collision.gameObject.tag == tag)
             {
 
-                if (collision.gameObject.tag == "Enemy")
-                {
-                    collision.gameObject.GetComponent<EnemyController>().damageEnemy(bulletDamage);
-                    Collider[] colliders = Physics.OverlapSphere(transform.position, 50f);
-                    foreach(Collider closeObjects in colliders)
-                    {
-                        Rigidbody rigidbody = closeObjects.GetComponent<Rigidbody>();
-                        if(rigidbody != null)
-                        {
-                            rigidbody.AddExplosionForce(500f, transform.position, 0.5f);
-                        }
-                    }
-                }
+
 
                 //Particle System
-
                 Destroy(gameObject);
 
             }
         }
-        
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+            EnemyController zombie = collision.gameObject.GetComponent<EnemyController>();
+            TurretController turret = collision.gameObject.GetComponent<TurretController>();
+            if(zombie != null)
+            {
+                zombie.damageEnemy(bulletDamage);
+            }
+            else if(turret != null)
+            {
+                Debug.Log("turret hited");
+                turret.damageEnemy(bulletDamage);
+            }
+        }
 
     }
+
 }

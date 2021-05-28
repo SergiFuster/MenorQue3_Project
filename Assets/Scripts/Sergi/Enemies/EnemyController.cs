@@ -28,6 +28,8 @@ public class EnemyController : MonoBehaviour
     const int diamondTokenProb = 10;
     const int magmaTokenProb = 5;
 
+    private bool playingAnimation = false;
+
     private void Start()
     {
         target = GameObject.Find("Player").transform;
@@ -41,25 +43,29 @@ public class EnemyController : MonoBehaviour
 
         distance = (transform.position - target.position).magnitude;
 
-        if (distance < distanceToDetect) targetDetected = true; //Check if enemy have detected player
+        if (distance <= distanceToDetect) targetDetected = true; //Check if enemy have detected player
 
 
         //Check if is close enough and if attack rate lets attack
-        if (targetDetected)
+        if (!playingAnimation)
         {
-            if (distance < distanceToAttack)
+
+            if (targetDetected)
             {
-                if (Time.time >= nextTimeToAttack)
+                if (distance <= distanceToAttack)
                 {
-                    nextTimeToAttack = Time.time + 1f / attackRate;
-                    StartCoroutine(Attack());
+                    if (Time.time >= nextTimeToAttack)
+                    {
+                        StartCoroutine(Attack());
+                        nextTimeToAttack = Time.time + 1f / attackRate;
+                    }
                 }
-            }
-            else
-            {
-                Agent.SetDestination(target.position);
-                anim.SetFloat("speed", Agent.speed);
-                Agent.isStopped = false;
+                else
+                {
+                    Agent.SetDestination(target.position);
+                    anim.SetFloat("speed", Agent.speed);
+                    Agent.isStopped = false;
+                }
             }
         }
 
@@ -128,20 +134,22 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    void hurted()
+    private void hurted()
     {
-        Debug.Log(gameObject.name + " current health: " + health);
-        Agent.isStopped = true;
-        //anim.SetTrigger("damage");
+        if(!targetDetected)
+            targetDetected = true;
+
+        //Partycles ??
     }
 
     IEnumerator Attack()
     {
         anim.SetFloat("speed", 0f);
+        playingAnimation = true;
         anim.SetTrigger("attack");
         Agent.isStopped = true;
-        yield return new WaitForSeconds(1f);
-        Collider[] colliders = Physics.OverlapSphere(attackPoint.position, 50f);
+        yield return new WaitForSeconds(1.5f);
+        Collider[] colliders = Physics.OverlapSphere(attackPoint.position, 1f);
         foreach (Collider closeObjects in colliders)
         {
             PlayerHealthManager player = closeObjects.GetComponent<PlayerHealthManager>();
@@ -150,6 +158,7 @@ public class EnemyController : MonoBehaviour
                 player.damaged(damageAttack);
             }
         }
+        playingAnimation = false;
     }
 
     void setRigidbodiesState(bool state)
@@ -177,7 +186,5 @@ public class EnemyController : MonoBehaviour
         GetComponent<Collider>().enabled = !state;
 
     }
-
-    
 
 }

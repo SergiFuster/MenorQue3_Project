@@ -18,6 +18,8 @@ public class ProjectileGun : MonoBehaviour
     public float fireRate = 15f;
     public AmmoUI ammoUI;
     public AmmoBar ammoBar;
+    public float shakeDuration;
+    public float shakeMagnitude;
 
     private bool isReloading = false;
     private float nextTimeToFire = 0f;
@@ -31,6 +33,12 @@ public class ProjectileGun : MonoBehaviour
 
 
         if(currentChamber <= 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+
+        else if(Input.GetKeyDown(KeyCode.R) && currentChamber < chamberSize)
         {
             StartCoroutine(Reload());
             return;
@@ -57,8 +65,9 @@ public class ProjectileGun : MonoBehaviour
     public void Shoot()
     {
         
+        StartCoroutine(CameraShake.Camera.Shake(shakeDuration, shakeMagnitude));
         detonate.Play();
-        GameObject currentBullet = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject currentBullet = Instantiate(bullet, firePoint.position, transform.rotation);
         Rigidbody rb = currentBullet.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * bulletForwardVelocity, ForceMode.Impulse);
         rb.AddForce(transform.up * bulletUpwardVelocity, ForceMode.Impulse);

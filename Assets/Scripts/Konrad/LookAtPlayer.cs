@@ -17,8 +17,15 @@ public class LookAtPlayer : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 newPosition = player.position + _offset;
+        if (PlayerControl.vida > 0)
+        {
+            Vector3 newPosition = player.position + _offset;
 
-        transform.position = Vector3.Slerp(transform.position, newPosition, smoothFactor);
+            transform.position = Vector3.Slerp(transform.position, newPosition, smoothFactor);
+        }
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
     }
 }

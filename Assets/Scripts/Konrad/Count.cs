@@ -4,24 +4,10 @@ using UnityEngine;
 
 public class Count : MonoBehaviour
 {
-    public int Score;
+    public static int fragments;
 
     void Start()
     {
-        Score = 0;
-    }
-
-    private void Update()
-    {
-        
-    }
-
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.name == "Jugador")
-        {
-            gameObject.SetActive(false);
-            Debug.Log("Fragment entered");
-        }
+        fragments = 0;
     }
 }

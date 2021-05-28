@@ -9,6 +9,7 @@ public class GotoPlayer : MonoBehaviour
 
     void Update()
     {
-        transform.position = player.position;
+        if(PlayerControl.vida>0)
+            transform.position = player.position;
     }
 }

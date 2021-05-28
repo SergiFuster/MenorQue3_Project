@@ -30,17 +30,17 @@ public class PickUpSystem : MonoBehaviour
         //Add this weapon to price manager Game Object array
         PriceManager.manager.addWeapon(this.gameObject);
 
+        rb.isKinematic = true;
+
         //Setup
         if (!equipped)
         {
             gunScript.enabled = false;
-            rb.isKinematic = false;
         }
         else
         {
             gunScript.enabled = true;
             slotFull = true;
-            rb.isKinematic = true;
         }
 
     }
@@ -82,9 +82,6 @@ public class PickUpSystem : MonoBehaviour
             wallet.buyGun(gunPrice); //Discount gun price from wallet
             equipped = true;
             slotFull = true;
-
-            //Enable Kinematic
-            rb.isKinematic = true;
 
             // Make weapon a child of weapon container and move it to default position
             transform.SetParent(gunContainer);

@@ -27,7 +27,7 @@ public class RoundController : MonoBehaviour
             amountOfEnemies = Round * 10 / 2;
             currentEnemies = amountOfEnemies;
             roundText.updateRound(Round); //Update round UI
-            StartCoroutine(spawner.spawnEnemies(enemies[0], amountOfEnemies));
+            StartCoroutine(spawner.spawnEnemies(enemies, amountOfEnemies));
         }
 
     }

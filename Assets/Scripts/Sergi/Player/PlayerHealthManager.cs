@@ -7,6 +7,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     public float Health = 100;
     public HealthBar healthBar;
+    public PauseMenu pauseMenuUI;
 
     private void Start()
     {
@@ -34,7 +35,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("YOU HAVE DIED");
+        pauseMenuUI.DeadMenu();
     }
 
     public void takeHealth(float amountHeal)

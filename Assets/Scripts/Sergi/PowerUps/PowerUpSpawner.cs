@@ -11,7 +11,7 @@ public class PowerUpSpawner : MonoBehaviour
     int randomPowerUp;
     int randomSpawnPoint;
 
-    const int chance = 1;
+    const int chance = 20;
     
     
 
@@ -30,7 +30,7 @@ public class PowerUpSpawner : MonoBehaviour
             {
                 randomSpawnPoint = Random.Range(0, spawnPoints.Length);
                 randomPowerUp = Random.Range(0, PowerUps.Length);
-                Instantiate(PowerUps[randomPowerUp], spawnPoints[randomSpawnPoint].position, Quaternion.identity);
+                Instantiate(PowerUps[randomPowerUp], spawnPoints[randomSpawnPoint].position, transform.rotation);
                 Debug.Log("POWERUP HAVE SPAWNED");
             }
 
